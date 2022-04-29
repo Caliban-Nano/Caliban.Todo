@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-4545-9A1E7A4F7556}") = "Caliban.Todo", "src\Caliban.Todo\Caliban.Todo.csproj", "{68E6C28E-970B-43FE-9898-B7C99590BEF9}"
+EndProject
+Project("{9A19103F-16F7-4668-4545-9A1E7A4F7556}") = "Caliban.Todo.Test", "tests\Caliban.Todo.Test\Caliban.Todo.Test.csproj", "{9C130090-A3A3-4078-7878-78ED9AE13C7F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{68E6C28E-970B-43FE-9898-B7C99590BEF9} = {68E6C28E-970B-43FE-9898-B7C99590BEF9}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68E6C28E-970B-43FE-9898-B7C99590BEF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68E6C28E-970B-43FE-9898-B7C99590BEF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68E6C28E-970B-43FE-9898-B7C99590BEF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68E6C28E-970B-43FE-9898-B7C99590BEF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C130090-A3A3-4078-7878-78ED9AE13C7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C130090-A3A3-4078-7878-78ED9AE13C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C130090-A3A3-4078-7878-78ED9AE13C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C130090-A3A3-4078-7878-78ED9AE13C7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD60DF71-5807-473A-A32A-ACA118CF80F6}
+	EndGlobalSection
+EndGlobal

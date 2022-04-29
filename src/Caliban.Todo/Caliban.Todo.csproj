@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <BaseOutputPath>..\..\artifacts</BaseOutputPath>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>cuhsat</Authors>
+    <Copyright>Copyright ©️ 2022 Christian Uhsat</Copyright>
+    <PackageProjectUrl>https://caliban.uhsat.de</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Caliban-Nano/Caliban.Todo.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Company>Caliban.Todo</Company>
+    <OutputType>WinExe</OutputType>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>$(MSBuildProjectName).Test</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="App.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Caliban.Nano" Version="1.1.0" />
+  </ItemGroup>
+
+</Project>
