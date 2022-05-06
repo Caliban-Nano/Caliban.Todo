@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Caliban.Todo.Test
+namespace Caliban.Todo.Tests
 {
     [TestClass]
     public class MarkdownTests
