@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
 
 trigger:
-- master
+- main
 
 pool:
   vmImage: 'windows-latest'
@@ -17,19 +17,28 @@ variables:
   dotNetVersion: '6.0.x'
 
 steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
   inputs:
-    restoreSolution: '$(solution)'
+    command: restore
+    projects: '**/*.csproj'
 
-- task: VSBuild@1
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
   inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: build
+    projects: '**/*.sln'
 
-- task: VSTest@2
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: test
+    projects: '**/*tests.csproj'
+    arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" /p:Exclude="[Caliban.Todo.Tests]*"'
+    testRunTitle: 'Unit Tests'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
