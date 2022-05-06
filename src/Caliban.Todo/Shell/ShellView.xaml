@@ -5,10 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Caliban.Todo.Shell"
         mc:Ignorable="d"
+        Background="#ffff99"
+        WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
         SizeToContent="Height"        
         MinHeight="400" Width="400"
         WindowStartupLocation="CenterScreen">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
     <DockPanel Height="auto">
+        <TextBlock Text="Todo"/>
     </DockPanel>
 </Window>
