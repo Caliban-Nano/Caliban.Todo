@@ -15,7 +15,11 @@
             "cwd": "${workspaceFolder}/artifacts/Debug/net6.0-windows",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
-            "stopAtEntry": false
+            "stopAtEntry": false,
+            "justMyCode": true,
+            "logging": {
+                "moduleLoad": false
+            }
         },
         {
             "name": ".NET Core Attach",

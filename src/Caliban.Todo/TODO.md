@@ -1,3 +1,2 @@
 # TODO
-* Something todo
-* ~Something done~
+* Something

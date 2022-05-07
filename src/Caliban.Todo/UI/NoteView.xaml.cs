@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Caliban.Todo.UI.Views
+namespace Caliban.Todo.UI
 {
     /// <summary>
-    /// Interaktionslogik für TodoView.xaml
+    /// Interaktionslogik für NoteView.xaml
     /// </summary>
-    public partial class TodoView : Window
+    public partial class NoteView : Window
     {
-        public TodoView()
+        public NoteView()
         {
             InitializeComponent();
         }

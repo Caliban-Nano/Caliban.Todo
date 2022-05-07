@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using Caliban.Nano;
-using Caliban.Todo.UI.ViewModels;
+using Caliban.Todo.UI;
 
 namespace Caliban.Todo
 {
@@ -13,7 +13,7 @@ namespace Caliban.Todo
 
         void OnStartup(object sender, StartupEventArgs e)
         {
-            new Bootstrap().Show<TodoViewModel>();
+            new Bootstrap().Show<NoteViewModel>();
         }
     }
 }
