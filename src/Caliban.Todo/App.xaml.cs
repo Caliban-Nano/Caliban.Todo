@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using Caliban.Nano;
 using Caliban.Todo.Shell;
 
@@ -12,10 +11,7 @@ namespace Caliban.Todo
     {
         void OnStartup(object sender, StartupEventArgs e)
         {
-            new Bootstrap()
-                .AddAssembly(Assembly.GetExecutingAssembly())
-                .AddNamespace("Caliban.Todo.Shell")
-                .Show<ShellViewModel>();
+            new Bootstrap().Show<ShellViewModel>();
         }
     }
 }
