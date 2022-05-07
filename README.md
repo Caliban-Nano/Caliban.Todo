@@ -1,3 +1,3 @@
-# ![](docs/README.png) Caliban.Todo
+# ![](docs/img/Inline.png) Caliban.Todo
 
-A simple Todo application using the Caliban.Nano framework.
+A simple Todo application using the Caliban.Nano framework. (WIP)
