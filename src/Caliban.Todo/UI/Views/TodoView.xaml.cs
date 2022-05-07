@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Caliban.Todo.Shell
+namespace Caliban.Todo.UI.Views
 {
     /// <summary>
-    /// Interaktionslogik für ShellView.xaml
+    /// Interaktionslogik für TodoView.xaml
     /// </summary>
-    public partial class ShellView : Window
+    public partial class TodoView : Window
     {
-        public ShellView()
+        public TodoView()
         {
             InitializeComponent();
         }
