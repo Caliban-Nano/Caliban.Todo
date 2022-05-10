@@ -1,20 +1,19 @@
 ﻿using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using Caliban.Todo.Logic;
 
 namespace Caliban.Todo.Data
 {
     /// <summary>
     /// An overly simplistic Markdown parser for persistence.
     /// </summary>
-    public static class Markdown
+    public static class TodoRepository
     {
-        public static async Task<NoteModel> ImportAsync(string path)
+        public static async Task<TodoModel> LoadAsync(string path, bool throwOnError = true)
         {
-            var model = new NoteModel();
+            var model = new TodoModel();
 
-            if (File.Exists(path))
+            try
             {
                 var lines = await File.ReadAllLinesAsync(path, Encoding.UTF8);
 
@@ -22,19 +21,18 @@ namespace Caliban.Todo.Data
                 {
                     model.Add(Regex.Replace(line, @"^\*\s", ""));
                 }
-
+            }
+            catch (Exception)
+            {
+                if (throwOnError) throw;
             }
 
             return model;
         }
 
-        public static async Task ExportAsync(string path, NoteModel model)
+        public static async Task SaveAsync(string path, TodoModel model)
         {
-            var lines = new List<string>() { "# TODO" };
-            
-            lines.AddRange(model.Select(item => $"* {item}"));
-
-            await File.WriteAllLinesAsync(path, lines, Encoding.UTF8);
+            await File.WriteAllTextAsync(path, model.ToString(), Encoding.UTF8);
         }
     }
 }

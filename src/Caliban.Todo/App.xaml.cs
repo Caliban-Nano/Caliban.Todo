@@ -13,7 +13,7 @@ namespace Caliban.Todo
 
         void OnStartup(object sender, StartupEventArgs e)
         {
-            new Bootstrap().Show<NoteViewModel>();
+            new Bootstrap().Show<MainViewModel>();
         }
     }
 }

@@ -15,13 +15,15 @@ using System.Windows.Shapes;
 namespace Caliban.Todo.UI
 {
     /// <summary>
-    /// Interaktionslogik für NoteView.xaml
+    /// Interaktionslogik für MainView.xaml
     /// </summary>
-    public partial class NoteView : Window
+    public partial class MainView : Window
     {
-        public NoteView()
+        public MainView()
         {
             InitializeComponent();
+
+            MouseDown += delegate { DragMove(); };
         }
     }
 }
