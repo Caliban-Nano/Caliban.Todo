@@ -17,9 +17,13 @@ namespace Caliban.Todo.Data
             {
                 var lines = await File.ReadAllLinesAsync(path, Encoding.UTF8);
 
+                var title = lines.First(x => Regex.IsMatch(x, @"^\#"));
+
+                model.Title = Regex.Replace(title, @"^\#\s", "");
+
                 foreach (var line in lines.Where(x => Regex.IsMatch(x, @"^\*")))
                 {
-                    model.Add(Regex.Replace(line, @"^\*\s", ""));
+                    model.Items.Add(Regex.Replace(line, @"^\*\s", ""));
                 }
             }
             catch (Exception)

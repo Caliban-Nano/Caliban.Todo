@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Caliban.Nano.Contracts;
 using Caliban.Nano.UI;
 using Caliban.Todo.Data;
@@ -10,24 +11,16 @@ namespace Caliban.Todo.UI
         public string DisplayName => "TODO";
         public ICommand AddCommand { get; }
         public ICommand DelCommand { get; }
-        public TodoModel Items
-        {
-            get => _items;
-            set
-            {
-                if (_items != value)
-                {
-                    _items = value;
+        public TodoModel Model { get; private set; } = new();
 
-                    NotifyPropertyChanged();
-                }
-            }
-        }
+        #region UI Properties
+        public ObservableCollection<string> Items => Model.Items;
+        public string Title => Model.Title;
         public string? Input
         {
-             get => _input;
-             set
-             {
+            get => _input;
+            set
+            {
                 if (_input != value)
                 {
                     _input = value;
@@ -37,8 +30,8 @@ namespace Caliban.Todo.UI
             }
         }
 
-        private TodoModel _items = new();
         private string? _input;
+        #endregion
 
         public MainViewModel()
         {
@@ -48,14 +41,17 @@ namespace Caliban.Todo.UI
 
         public override async Task<bool> OnActivate()
         {
-            Items = await TodoRepository.LoadAsync(App.Todofile, false);
+            Model = await TodoRepository.LoadAsync(App.Todofile, false);
+
+            NotifyPropertyChanged("Title");
+            NotifyPropertyChanged("Items");
 
             return await base.OnActivate();
         }
         
         public override async Task<bool> OnDeactivate()
         {
-            await TodoRepository.SaveAsync(App.Todofile, Items);
+            await TodoRepository.SaveAsync(App.Todofile, Model);
 
             return await base.OnDeactivate();
         }
@@ -69,12 +65,18 @@ namespace Caliban.Todo.UI
         {
             Input = "";
 
-            Items.Add(todo!);
+            if (todo is not null)
+            {
+                Items.Add(todo);
+            }
         }
 
         private void DelTodo(string? todo)
         {
-            Items.Remove(todo!);
+            if (todo is not null)
+            {
+                Items.Remove(todo);
+            }
         }
     }
 }

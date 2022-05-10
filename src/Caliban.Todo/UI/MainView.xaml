@@ -10,12 +10,12 @@
         Style="{DynamicResource MainView}">
     <DockPanel FocusManager.FocusedElement="{Binding ElementName=Input}" Style="{DynamicResource Panel}">
 
-        <TextBlock x:Name="DisplayName" DockPanel.Dock="Top" Style="{DynamicResource Title}"/>
+        <TextBlock x:Name="Title" DockPanel.Dock="Top" Style="{DynamicResource Title}"/>
 
         <ItemsControl x:Name="Items" DockPanel.Dock="Top" Style="{DynamicResource Items}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" Style="{DynamicResource Item}">
+                    <TextBlock Text="{Binding StringFormat='- {0}'}" Style="{DynamicResource Item}">
                         <TextBlock.InputBindings>
                             <MouseBinding MouseAction="LeftClick"
                                 Command="{Binding DataContext.DelCommand, ElementName=Items}"

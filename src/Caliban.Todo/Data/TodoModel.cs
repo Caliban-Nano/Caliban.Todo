@@ -3,15 +3,19 @@ using System.Text;
 
 namespace Caliban.Todo.Data
 {
-    public class TodoModel : ObservableCollection<string>
+    public class TodoModel
     {
+        public string Title { get; set; } = "";
+
+        public readonly ObservableCollection<string> Items = new();
+
         public override string ToString()
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("# TODO");
+            sb.AppendLine($"# {Title}");
 
-            foreach (var item in this)
+            foreach (var item in Items)
             {
                 sb.AppendLine($"* {item}");
             }
