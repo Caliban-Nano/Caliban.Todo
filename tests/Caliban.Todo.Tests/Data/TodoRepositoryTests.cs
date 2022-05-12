@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using Caliban.Todo.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,19 +8,12 @@ namespace Caliban.Todo.Tests.Data
     [TestClass]
     public sealed class TodoRepositoryTests
     {
-        private const string Todo = @".\Todo.md";
-        private const string Test = @".\Test.md";
+        private const string Todofile = @".\Todo.md";
         
-        [TestInitialize]
-        public void Setup()
-        {
-            File.WriteAllText(Test, GetTestContent());
-        }
-
         [TestMethod]
-        public async Task LoadAsyncTest()
+        public void LoadTest()
         {
-            var model = await TodoRepository.LoadAsync(Todo);
+            var model = TodoRepository.Load(GetTestData());
 
             Assert.IsNotNull(model);
             Assert.AreEqual(model.Items.Count, 3);
@@ -33,7 +25,7 @@ namespace Caliban.Todo.Tests.Data
         }
 
         [TestMethod]
-        public async Task SaveAsyncTest()
+        public async Task SaveTest()
         {
             var model = new TodoModel();
 
@@ -42,10 +34,10 @@ namespace Caliban.Todo.Tests.Data
                 model.Items.Add($"Test {i}");
             }
 
-            await TodoRepository.SaveAsync(Todo, model);
+            await TodoRepository.SaveAsync(Todofile, model);
 
-            var todo = await File.ReadAllLinesAsync(Todo);
-            var test = await File.ReadAllLinesAsync(Test);
+            var todo = await File.ReadAllLinesAsync(Todofile);
+            var test = GetTestData();
 
             Assert.AreEqual(todo.Length, test.Length);
 
@@ -55,18 +47,15 @@ namespace Caliban.Todo.Tests.Data
             }
         }
 
-        private string GetTestContent()
+        private static string[] GetTestData()
         {
-            var test = new StringBuilder();
-
-            test.AppendLine("# TODO");
-
-            for (var i = 1; i < 4; i++)
+            return new string[]
             {
-                test.AppendLine($"* Test {i}");
-            }
-
-            return test.ToString();
+                "# TODO",
+                "* Test 1",
+                "* Test 2",
+                "* Test 3"
+            };
         }
     }
 }

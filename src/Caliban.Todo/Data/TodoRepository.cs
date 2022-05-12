@@ -10,6 +10,27 @@ namespace Caliban.Todo.Data
     public static class TodoRepository
     {
         /// <summary>
+        /// Loads the todo model from Markdown data.
+        /// </summary>
+        /// <param name="lines">The data lines.</param>
+        /// <returns>The filled todo model.</returns>
+        public static TodoModel Load(string[] data)
+        {
+            var model = new TodoModel();
+
+            var header = data.First(x => Regex.IsMatch(x, @"^\#"));
+
+            model.Header = Regex.Replace(header, @"^\#\s", "");
+
+            foreach (var line in data.Where(x => Regex.IsMatch(x, @"^\*")))
+            {
+                model.Items.Add(Regex.Replace(line, @"^\*\s", ""));
+            }
+
+            return model;
+        }
+
+        /// <summary>
         /// (Awaitable) Loads the todo model from a Markdown file.
         /// </summary>
         /// <param name="path">The file path.</param>
@@ -17,27 +38,16 @@ namespace Caliban.Todo.Data
         /// <returns>The filled todo model.</returns>
         public static async Task<TodoModel> LoadAsync(string path, bool throwOnError = true)
         {
-            var model = new TodoModel();
-
             try
             {
-                var lines = await File.ReadAllLinesAsync(path, Encoding.UTF8);
-
-                var header = lines.First(x => Regex.IsMatch(x, @"^\#"));
-
-                model.Header = Regex.Replace(header, @"^\#\s", "");
-
-                foreach (var line in lines.Where(x => Regex.IsMatch(x, @"^\*")))
-                {
-                    model.Items.Add(Regex.Replace(line, @"^\*\s", ""));
-                }
+                return Load(await File.ReadAllLinesAsync(path, Encoding.UTF8));
             }
             catch (Exception)
             {
                 if (throwOnError) throw;
             }
 
-            return model;
+            return new TodoModel(); // Safe default
         }
 
         /// <summary>
