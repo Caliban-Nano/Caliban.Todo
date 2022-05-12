@@ -18,8 +18,12 @@
     <Company>Caliban.Todo</Company>
     <OutputType>WinExe</OutputType>
     <ApplicationIcon>App.ico</ApplicationIcon>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishReadyToRun>true</PublishReadyToRun>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <None Remove="Assets\Close.png" />
   </ItemGroup>
@@ -37,6 +41,13 @@
 
   <ItemGroup>
     <PackageReference Include="Caliban.Nano" Version="1.4.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>
