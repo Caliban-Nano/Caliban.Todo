@@ -5,10 +5,16 @@ using System.Text.RegularExpressions;
 namespace Caliban.Todo.Data
 {
     /// <summary>
-    /// An overly simplistic Markdown parser for persistence.
+    /// An overly simplistic Markdown repository.
     /// </summary>
     public static class TodoRepository
     {
+        /// <summary>
+        /// (Awaitable) Loads the todo model from a Markdown file.
+        /// </summary>
+        /// <param name="path">The file path.</param>
+        /// <param name="throwOnError">If an exception should be thrown.</param>
+        /// <returns>The filled todo model.</returns>
         public static async Task<TodoModel> LoadAsync(string path, bool throwOnError = true)
         {
             var model = new TodoModel();
@@ -17,9 +23,9 @@ namespace Caliban.Todo.Data
             {
                 var lines = await File.ReadAllLinesAsync(path, Encoding.UTF8);
 
-                var title = lines.First(x => Regex.IsMatch(x, @"^\#"));
+                var header = lines.First(x => Regex.IsMatch(x, @"^\#"));
 
-                model.Title = Regex.Replace(title, @"^\#\s", "");
+                model.Header = Regex.Replace(header, @"^\#\s", "");
 
                 foreach (var line in lines.Where(x => Regex.IsMatch(x, @"^\*")))
                 {
@@ -34,6 +40,11 @@ namespace Caliban.Todo.Data
             return model;
         }
 
+        /// <summary>
+        /// (Awaitable) Saves the todo model to a Markdown file.
+        /// </summary>
+        /// <param name="path">The file path.</param>
+        /// <param name="model">The todo model.</param>
         public static async Task SaveAsync(string path, TodoModel model)
         {
             await File.WriteAllTextAsync(path, model.ToString(), Encoding.UTF8);

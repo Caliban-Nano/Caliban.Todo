@@ -1,3 +1,3 @@
 # ![](docs/img/Inline.png) Caliban.Todo
 
-A simple Todo application using the Caliban.Nano framework. (WIP)
+A tiny and tidy To-Do-List application, using the Caliban.Nano MVVM framework.

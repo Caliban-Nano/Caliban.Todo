@@ -5,38 +5,43 @@
         xmlns:local="clr-namespace:Caliban.Todo.UI"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
-        WindowStyle="None" AllowsTransparency="True" ShowInTaskbar="False"
+        WindowStyle="None" AllowsTransparency="True" ShowInTaskbar="False" Topmost="True"
         WindowStartupLocation="CenterScreen"
-        Style="{DynamicResource MainView}">
-    <DockPanel FocusManager.FocusedElement="{Binding ElementName=Input}" Style="{DynamicResource Panel}">
+        Style="{StaticResource MainView}">
+    <DockPanel FocusManager.FocusedElement="{Binding ElementName=Input}" Style="{StaticResource Panel}">
 
-        <TextBlock x:Name="Title" DockPanel.Dock="Top" Style="{DynamicResource Title}"/>
+        <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+            <TextBlock x:Name="Header" DockPanel.Dock="Left" Style="{StaticResource Title}"/>
 
-        <ItemsControl x:Name="Items" DockPanel.Dock="Top" Style="{DynamicResource Items}">
+            <Button x:Name="CloseWindow" DockPanel.Dock="Right" Style="{StaticResource Close}">
+                <Image Source="../Assets/Close.png"/>
+            </Button>
+        </DockPanel>
+
+        <ItemsControl x:Name="Items" DockPanel.Dock="Top" Style="{StaticResource Items}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding StringFormat='- {0}'}" Style="{DynamicResource Item}">
+                    <TextBlock Text="{Binding StringFormat='- {0}&#160;'}" Style="{StaticResource Item}">
                         <TextBlock.InputBindings>
-                            <MouseBinding MouseAction="LeftClick"
+                            <MouseBinding
+                                MouseAction="LeftClick"
                                 Command="{Binding DataContext.DelCommand, ElementName=Items}"
-                                CommandParameter="{Binding}"/>
+                                CommandParameter="{Binding}"
+                            />
                         </TextBlock.InputBindings>
                     </TextBlock>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <TextBox x:Name="Input" DockPanel.Dock="Top" Style="{DynamicResource Input}">
+        <TextBox x:Name="Input" DockPanel.Dock="Top" Style="{StaticResource Input}">
             <TextBox.InputBindings>
-                <KeyBinding Key="Enter"
+                <KeyBinding
+                    Key="Enter"
                     Command="{Binding AddCommand}"
-                    CommandParameter="{Binding Text, ElementName=Input}"/>
+                    CommandParameter="{Binding Text, ElementName=Input}"
+                />
             </TextBox.InputBindings>
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="3"/>
-                </Style>
-            </TextBox.Resources> >
         </TextBox>
     
     </DockPanel>

@@ -2,10 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type Window}" x:Key="MainView">
-        <Setter Property="ResizeMode" Value="CanResizeWithGrip"/>
+        <Setter Property="ResizeMode" Value="CanResize"/>
         <Setter Property="SizeToContent" Value="WidthAndHeight"/>
-        <Setter Property="Background" Value="#2E3238"/>
-        <Setter Property="Foreground" Value="#E6E6E6"/>
+        <Setter Property="Background" Value="#282923"/>
+        <Setter Property="Foreground" Value="#B5B6B4"/>
         <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
         <Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
         <Setter Property="FontFamily" Value="Segoe UI"/>
@@ -21,23 +21,71 @@
         <Setter Property="Margin" Value="20"/>
     </Style>
 
-    <Style TargetType="{x:Type ItemsControl}" x:Key="Items">
-        <Setter Property="Background" Value="#2E3238"/>
-        <Setter Property="Foreground" Value="#E6E6E6"/>
-        <Setter Property="BorderThickness" Value="0"/>
-    </Style>
-
     <Style TargetType="{x:Type TextBlock}" x:Key="Title">
+        <Setter Property="Foreground" Value="#D9D9D9"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Margin" Value="0,0,0,5"/>
     </Style>
 
+    <Style TargetType="{x:Type Button}" x:Key="Close">
+        <Setter Property="Background" Value="#282923"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="0,-10,-5,0"/>
+        <Setter Property="Opacity" Value="0.2"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Width" Value="24"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="0" CornerRadius="3">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#E81123"/>
+                <Setter Property="Opacity" Value="1.0"/>
+            </Trigger>
+
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="#FF142B"/>
+                <Setter Property="Opacity" Value="1.0"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style TargetType="{x:Type ItemsControl}" x:Key="Items">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="2,0,0,0"/>
+    </Style>
+
     <Style TargetType="{x:Type TextBlock}" x:Key="Item">
         <Setter Property="Margin" Value="0,0,0,5"/>
+
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="TextDecorations" Value="Strikethrough"/>
+                <Setter Property="TextDecorations">
+                    <Setter.Value>
+                        <TextDecorationCollection>
+                            <TextDecoration Location="Strikethrough">
+                                <TextDecoration.Pen>
+                                    <Pen
+                                        Brush="#E81123"
+                                        Thickness="5"
+                                        StartLineCap="Round"
+                                        EndLineCap="Round"
+                                    />
+                                </TextDecoration.Pen>
+                            </TextDecoration>
+                        </TextDecorationCollection>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
+
             <Trigger Property="IsMouseOver" Value="false">
                 <Setter Property="TextDecorations" Value="None"/>
             </Trigger>
@@ -46,13 +94,13 @@
 
     <Style TargetType="{x:Type TextBox}" x:Key="Input">
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Background" Value="#3B4148"/>
-        <Setter Property="Foreground" Value="#E6E6E6"/>
-        <Setter Property="CaretBrush" Value="#E6E6E6"/>
-        <Setter Property="SelectionBrush" Value="#D9D9D9"/>
+        <Setter Property="Background" Value="#282923"/>
+        <Setter Property="Foreground" Value="#D9D9D9"/>
+        <Setter Property="CaretBrush" Value="#63635F"/>
+        <Setter Property="SelectionBrush" Value="#63635F"/>
         <Setter Property="SelectionOpacity" Value="0.4"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Padding" Value="0,5"/>
     </Style>
 
 </ResourceDictionary>

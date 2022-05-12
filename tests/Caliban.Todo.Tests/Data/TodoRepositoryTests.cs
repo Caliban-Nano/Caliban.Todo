@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using Caliban.Todo.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -6,36 +7,42 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Caliban.Todo.Tests.Data
 {
     [TestClass]
-    public class TodoRepositoryTests
+    public sealed class TodoRepositoryTests
     {
         private const string Todo = @".\Todo.md";
         private const string Test = @".\Test.md";
+        
+        [TestInitialize]
+        public void Setup()
+        {
+            File.WriteAllText(Test, GetTestContent());
+        }
 
         [TestMethod]
-        [DeploymentItem(@"Data\Todo.md")]
         public async Task LoadAsyncTest()
         {
             var model = await TodoRepository.LoadAsync(Todo);
 
             Assert.IsNotNull(model);
-            Assert.AreEqual(model.Count, 3);
+            Assert.AreEqual(model.Items.Count, 3);
 
-            for (var i = 0; i < model.Count; i++)
+            for (var i = 0; i < model.Items.Count; i++)
             {
-                Assert.AreEqual(model[i], $"Test {i + 1}");
+                Assert.AreEqual(model.Items[i], $"Test {i + 1}");
             }
         }
 
         [TestMethod]
-        [DeploymentItem(@"Data\Todo.md")]
         public async Task SaveAsyncTest()
         {
-            await TodoRepository.SaveAsync(Todo, new TodoModel
+            var model = new TodoModel();
+
+            for (var i = 1; i < 4; i++)
             {
-                "Test 1",
-                "Test 2",
-                "Test 3"
-            });
+                model.Items.Add($"Test {i}");
+            }
+
+            await TodoRepository.SaveAsync(Todo, model);
 
             var todo = await File.ReadAllLinesAsync(Todo);
             var test = await File.ReadAllLinesAsync(Test);
@@ -46,6 +53,20 @@ namespace Caliban.Todo.Tests.Data
             {
                 Assert.AreEqual(todo[i], test[i]);
             }
+        }
+
+        private string GetTestContent()
+        {
+            var test = new StringBuilder();
+
+            test.AppendLine("# TODO");
+
+            for (var i = 1; i < 4; i++)
+            {
+                test.AppendLine($"* Test {i}");
+            }
+
+            return test.ToString();
         }
     }
 }
