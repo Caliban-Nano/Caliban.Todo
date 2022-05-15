@@ -4,7 +4,7 @@
 
 A tiny and tidy To-Do-List application, using the Caliban.Nano MVVM framework.
 
-# List location
+# User data location
 The user specific todo list is stored in `Markdown` format under the following path
 
 ```cmd
