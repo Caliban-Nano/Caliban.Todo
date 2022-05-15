@@ -20,7 +20,7 @@
     <ApplicationIcon>App.ico</ApplicationIcon>
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <PublishSingleFile>true</PublishSingleFile>
+    <PublishSingleFile Condition="'$(Configuration)' == 'Release'">true</PublishSingleFile>
     <PublishReadyToRun>true</PublishReadyToRun>
     <VersionPrefix>1.0.1</VersionPrefix>
   </PropertyGroup>
