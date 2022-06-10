@@ -1,0 +1,48 @@
+﻿<Window x:Class="Caliban.Todo.UI.TodoView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Caliban.Todo.UI"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=local:TodoViewModel}"
+        WindowStyle="None" AllowsTransparency="True" ShowInTaskbar="True" Topmost="True"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource MainView}">
+    <DockPanel FocusManager.FocusedElement="{Binding ElementName=Input}" Style="{StaticResource Panel}">
+
+        <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+            <TextBlock x:Name="Header" DockPanel.Dock="Left" Style="{StaticResource Title}"/>
+
+            <Button x:Name="CloseWindow" DockPanel.Dock="Right" Style="{StaticResource Close}">
+                <Image Source="../Assets/Close.png"/>
+            </Button>
+
+            <Button x:Name="MinimizeWindow" DockPanel.Dock="Right" Style="{StaticResource Minimize}">
+                <Image Source="../Assets/Minimize.png"/>
+            </Button>
+        </DockPanel>
+
+        <ItemsControl x:Name="Items" DockPanel.Dock="Top" Style="{StaticResource Items}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding StringFormat='- {0}&#160;'}" Style="{StaticResource Item}">
+                        <TextBlock.InputBindings>
+                            <MouseBinding MouseAction="LeftClick"
+                                Command="{Binding DataContext.DelCommand, ElementName=Items}"
+                                CommandParameter="{Binding}"/>
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <TextBox x:Name="Input" DockPanel.Dock="Top" Style="{StaticResource Input}">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Enter"
+                    Command="{Binding AddCommand}"
+                    CommandParameter="{Binding Text, ElementName=Input}"/>
+            </TextBox.InputBindings>
+        </TextBox>
+
+    </DockPanel>
+</Window>
