@@ -22,11 +22,13 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PublishSingleFile Condition="'$(Configuration)' == 'Release'">true</PublishSingleFile>
     <PublishReadyToRun>true</PublishReadyToRun>
-    <VersionPrefix>1.0.1</VersionPrefix>
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <EnableNETAnalyzers>False</EnableNETAnalyzers>
   </PropertyGroup>
   
   <ItemGroup>
     <None Remove="Assets\Close.png" />
+    <None Remove="Assets\Minimize.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,11 +39,9 @@
 
   <ItemGroup>
     <Content Include="App.ico" />
+    <PackageReference Include="Caliban.Nano" Version="1.7.0" />
     <Resource Include="Assets\Close.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Caliban.Nano" Version="1.4.3" />
+    <Resource Include="Assets\Minimize.png" />
   </ItemGroup>
 
   <ItemGroup>
